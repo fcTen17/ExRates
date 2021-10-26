@@ -12,7 +12,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-top: 60px;
+  padding-top: 80px;
 }
 
 code {
@@ -22,9 +22,19 @@ code {
 
 .main_frame {
   background-color:rgb(146, 219, 241);
+  
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: white;
 }
 
 /* Navbar */
+
 
 
 
@@ -45,7 +55,6 @@ footer {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  
   height: 100%;
 }
 

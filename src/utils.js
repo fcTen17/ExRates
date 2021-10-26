@@ -7,3 +7,22 @@ export const checkStatus = (response) => {
   }
 
 export const json = (response) => response.json()
+
+const fetchDaylyRates = () => {
+  fetch(`https://altexchangerateapi.herokuapp.com/latest`)
+        .then(checkStatus)
+        .then(json)
+        .then((data) => {
+          if (data) {
+            console.log(data);
+            const { rates } = data;
+            const ratesArr = Object.entries(rates);
+            this.setState({ results: ratesArr})
+            console.log(this.state.results);  
+          }
+        })
+        .catch((error) => {
+          this.setState({ error: error.message });
+          console.log(error);
+        })
+}

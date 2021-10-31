@@ -1,0 +1,9 @@
+.container {
+    display:flex;
+    
+}
+
+.list {
+    overflow-y: scroll;
+    max-height: 150px;   
+}

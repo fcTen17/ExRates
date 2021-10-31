@@ -2,9 +2,66 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Base$ } from './Base$';
 import { Pair$ } from './Pair$';
+import { json, checkStatus } from './utils';
+import $ from 'jquery/dist/jquery.min.js';
 import './App.css';
 
+let ratesObj = {
+  container: {},
+  fetch () {
+    fetch(`https://altexchangerateapi.herokuapp.com/latest`)
+    .then(checkStatus)
+    .then(json)
+    .then((data) => {
+      this.container = data;
+      if (data) {
+        //console.log(data);
+        const { rates } = data;
+        ratesArr = Object.entries(rates);
+        console.log(ratesArr);
+        console.log(ratesObj); 
+      }
+    })
+    .catch((error) => {
+      
+      console.log(error);
+    })
+  }
+};
+let ratesArr = undefined;
 
+/*
+const fetchDaylyRates = () => {
+  
+  fetch(`https://altexchangerateapi.herokuapp.com/latest`)
+    .then(checkStatus)
+    .then(json)
+    .then((data) => {
+      //ratesObj = data;
+      if (data) {
+        //console.log(data);
+        const { rates } = data;
+        ratesArr = Object.entries(rates);
+        console.log(ratesArr);
+        console.log(ratesObj); 
+      }
+    })
+    .catch((error) => {
+      
+      console.log(error);
+    })
+}
+
+*/
+
+
+
+
+$(document).ready(function(){
+  ratesObj.fetch()
+  let test = ratesObj.container;
+  console.log(ratesObj.container);
+});
 
 const App = () => {
   return (
@@ -77,7 +134,7 @@ const App = () => {
 
 export default App;
 
-
+export { ratesObj };
 /* Pills Nav */
 /*
 

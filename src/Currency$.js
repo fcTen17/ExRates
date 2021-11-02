@@ -1,32 +1,46 @@
 import React from 'react';
 import './Currency$.css';
 import { currencyCollection } from './utils.js'
-// const addCurrency = ( )
 
-class CurrencyOption extends React.Component {
-  
+
+
+
+const currencyListRender = (  currencyCodeObject , handlerFunction ) => {
+  let listArr = []; 
+  for (const currencyCode in currencyCodeObject) {
+    let renderCodeObj = currencyCodeObject[currencyCode];
+    let renderCurrencyCode = currencyCode;
     
-  render () {
+    
+   //console.log('renderCurrencyCode: ' + renderCurrencyCode);
+   //console.log(currencyCodeObject[currencyCode].country);
+   //console.log(renderCodeObj);
+   listArr.push(<CurrencyOption key={renderCurrencyCode} onClick={handlerFunction} renderCode={renderCodeObj} currencyCode={renderCurrencyCode}/>)
+  };
+  return listArr;
+}
+                                                         
 
-  const Code = this.props.renderCode;
-  const Country = currencyCollection.code[Code].country;
-  const Name = currencyCollection.code[Code].currencyName;
+const CurrencyOption = (props) => {
+  
+  const {
+    onClick,               
+    currencyCode,
+  } = props;
 
+  const {
+    currencyName,
+    country,
+  } = props.renderCode;
+    
   return (
-    <button className="dropdown-item"  value={`${Code}`}>
-      <img className={`small_flag" src="/image/flags/${Code}.png`}></img>
-      {Name} - {Country} {this.props.renderCode}
+    <button className="dropdown-item" onClick={onClick} value={currencyCode}>
+      <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`}></img>
+      {currencyCode} - {currencyName} - {country}
     </button>
-  )}
+  )
 };
-
-
-/*for (const renderCode in currencyCollection.code) {
-  console.log(`${renderCode}`);
-};*/
-
-//onClick={this.handleSelection}
-
+ 
 class Currency$ extends React.Component {
   constructor(props) {
     super(props);
@@ -68,32 +82,10 @@ class Currency$ extends React.Component {
                 <button className="btn dropdown-toggle currency_select" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {this.state.selectedCurrencyName} - {this.state.selectedCurrencyCountry}
                 </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div className="dropdown-menu currency_dropdown" aria-labelledby="dropdownMenuButton">
 
-                {(() => {
-                  for (const renderCode in currencyCollection.code) {
-                    
-                   //console.log(`${renderCode}`);
-                   console.log(currencyCollection.code[renderCode].country);
-                   <CurrencyOption key={renderCode} renderCode={renderCode}/>;
-                  }                  
-                })()}
-                
-
-
-                  <li className="dropdown-item" href="#"><img className="small_flag" src="/image/flags/EUR.png"></img><button onClick={this.handleSelection} value="EUR">EURO EUROPEAN UNION</button></li>
-                  
-
-
-                  //Working Button
-                  <button className="dropdown-item" onClick={this.handleSelection} value="BRL"><img className="small_flag" src="/image/flags/BRL.png"></img>BRAZILIAN REAL - BRAZIL</button>
-
-
-
-
-
-                  
-                  
+                {currencyListRender(currencyCollection.code , this.handleSelection)}
+                                  
                 </div>
               </div>
             </div>
@@ -148,4 +140,29 @@ export default Currency$;
             </div>
           </div>
         </div>
+*/
+
+
+
+/*
+
+for (const currencyCode in currencyCollection.code) {
+                    let renderCode = currencyCollection.code[currencyCode]
+                   
+                    
+                   console.log('currencyCode: ' + currencyCode);
+                   console.log(currencyCollection.code[currencyCode].country);
+                   console.log(renderCode);
+                   return <CurrencyOption key={currencyCode} renderCode={renderCode} currencyCode={currencyCode}/>;
+                  }    
+
+
+  
+              {(() => {
+                  
+                 return currencyListRender(currencyCollection.code , this.handleSelection);
+                               
+                })()}
+
+
 */

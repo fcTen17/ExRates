@@ -3,22 +3,22 @@ import React from 'react';
 import { json, checkStatus } from './utils';
 import './Base$.css';
 import Currency$ from './Currency$';
-
+import Group$ from './Group$';
 
 const Currency = (props) => {
-    const Code$ = props.pairArr[0];
-    const Rate$ = props.pairArr[1];
-        
-    return (
-        <div className="row">
-          <div className="col-4 col-md-2 col-lg-1 mb-3">
-            <h5>{Code$}</h5>
-          </div>
-          <div className="col-8 col-md-10 col-lg-11 mb-3">
-            <h5>{Rate$}</h5>
-          </div>
-        </div>
-      )
+  const Code$ = props.pairArr[0];
+  const Rate$ = props.pairArr[1];
+      
+  return (
+    <div className="row">
+      <div className="col-4 col-md-2 col-lg-1 mb-3">
+        <h5>{Code$}</h5>
+      </div>
+      <div className="col-8 col-md-10 col-lg-11 mb-3">
+        <h5>{Rate$}</h5>
+      </div>
+    </div>
+  )
 }
 
 class Base$ extends React.Component {
@@ -90,6 +90,7 @@ class Base$ extends React.Component {
             </div>
           </div>
           <Currency$ />
+          <Group$ />
         </div>
       )
     }

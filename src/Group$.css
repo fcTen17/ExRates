@@ -1,0 +1,26 @@
+#group_wrapper {
+    width: 300px;
+    height: 400px;
+    background-color: peru;
+}
+
+#group_selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.group_buttons {
+    display: flex;
+    justify-content:space-between;
+    margin: 0 auto;
+}
+
+#newGroupCheckOptionContainer {
+    overflow-y: scroll;
+    max-height: 150px;
+}
+
+#group_inner {
+    
+}

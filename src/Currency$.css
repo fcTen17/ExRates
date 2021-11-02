@@ -53,6 +53,8 @@
 #currency_amount input {
     width: 220px;
     height: 30px;
+    color: yellow;
+    background-color: black;
     margin-top: 10px;
     margin-left: 5px;
     text-align: right;
@@ -60,4 +62,9 @@
 
 #currency_value {
     display: flex;
+}
+
+.currency_dropdown {
+    overflow-y: scroll;
+    max-height: 150px;
 }

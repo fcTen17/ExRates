@@ -19,8 +19,8 @@ const groupCollection = {
   type : {
     currency : {
 
-      STANDARD : [
-      'USD' , 'EUR' , 'GBP' , 'CNY', 'JPY'   
+      MAIN : [
+      'USD' , 'EUR' , 'GBP' , 'CNY', 'JPY', 'CHF' , 'CAD'   
       ],
         
       ASIA : [ 
@@ -51,8 +51,18 @@ const currencyCheckOptionRender = ( currencyCodeObject ) => {
   return listArr;
 }
 
-const currencyGroupElementRender = ( groupElementObject ) => {
-  
+const currencyGroupElementRender = ( groupArr ) => {
+  let listArr = [];
+  for ( let i = 0;  i < groupArr.length; i++) {
+    let renderCurrencyCode = groupArr[i]
+    let  currencyName  = currencyCollection.code[renderCurrencyCode].currencyName 
+    
+    console.log(renderCurrencyCode);
+    console.log(currencyName);
+   
+    listArr.push(<CurrencyGroupElement key={renderCurrencyCode} currencyCode={renderCurrencyCode} currencyName={currencyName} />);
+  }
+  return listArr;
 }
 
 
@@ -64,7 +74,7 @@ const CurrencyGroupElement = (props) => {
 
   const {
     currencyName,
-  } = props.renderCode;
+  } = props;
     
   return (    
     <div className="groupElementContainer">
@@ -81,14 +91,16 @@ const CurrencyCheckOption = (props) => {
     currencyCode,
   } = props;
 
+
+
   const {
     currencyName,
   } = props.renderCode;
     
   return (    
     <div className="checkOptionContainer">
-      <input type="checkbox" class="form-check-input" value={`${currencyCode}`} id={`${currencyCode}dropdownCheck`}></input>
-      <label class="form-check-label" for={`${currencyCode}dropdownCheck`}>
+      <input type="checkbox" className="form-check-input" id={`${currencyCode}dropdownCheck`} defaultValue={`${currencyCode}`}></input>
+      <label className="form-check-label" htmlFor={`${currencyCode}dropdownCheck`}>
         <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`}></img>
         {currencyCode} - {currencyName}
       </label>
@@ -118,7 +130,7 @@ class Group$ extends React.Component {
     super(props);
     this.state = {
       groupCollection : groupCollection,
-      selectedGroup : 'STANDARD',
+      selectedGroup : 'MAIN',
 
     };  
     this.handleSelection = this.handleSelection.bind(this);
@@ -131,8 +143,12 @@ class Group$ extends React.Component {
     console.log('selectedGroup: ' + selectedGroup);
     this.setState( { selectedGroup : selectedGroup });
     console.log(this.state.selectedGroup);
+    
   }
 
+  handleChangeCheck() {
+
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -166,33 +182,33 @@ class Group$ extends React.Component {
     return (
       <div className="group" id="group_wrapper">
         <div id="group_selection">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div className="dropdown">
+            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Group Select
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {groupListRender( groupCollection.type.currency , this.handleSelection )}            
             </div>
           </div>
-          <div class="btn-group">
+          <div className="btn-group">
             
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" className="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               New Group
             </button>
-            <div class="dropdown-menu">
-              <form class="px-4 py-3 addGroupForm">
-                <div class="form-group">
-                  <label for="newGroupNameInput">Group Name</label>
-                  <input type="text" class="form-control" id="newGroupNameInput" placeholder="group name"></input>
+            <div className="dropdown-menu">
+              <form className="px-4 py-3 addGroupForm">
+                <div className="form-group">
+                  <label htmlFor="newGroupNameInput">Group Name</label>
+                  <input type="text" className="form-control" id="newGroupNameInput" placeholder="group name"></input>
                 </div>
                 <div id="currencyCheckOptionList">
                   CURRENCY LIST
                 </div>
                
-                <div class="form-check" id="newGroupCheckOptionContainer">
+                <div className="form-check" id="newGroupCheckOptionContainer">
                   {currencyCheckOptionRender( currencyCollection.code )}
                 </div>
-                <button type="submit" onClick={this.handleSubmit} class="btn btn-primary">Add Group</button>
+                <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">Add Group</button>
               </form>
             </div>
           </div>
@@ -201,7 +217,12 @@ class Group$ extends React.Component {
           
         
         <div id="group_inner">
-
+          <p>{this.state.selectedGroup}</p>
+          {(() => {
+            let selectedGroup = this.state.selectedGroup;
+            let groupArr = groupCollection.type.currency[selectedGroup];
+            return currencyGroupElementRender(groupArr);
+          })()}
 
         </div>
 

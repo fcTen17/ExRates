@@ -1,5 +1,6 @@
 import React from 'react';
 import './Currency$.css';
+import $ from 'jquery';
 import { currencyCollection } from './utils.js'
 
 
@@ -10,12 +11,7 @@ const currencyListRender = (  currencyCodeObject , handlerFunction ) => {
   for (const currencyCode in currencyCodeObject) {
     let renderCodeObj = currencyCodeObject[currencyCode];
     let renderCurrencyCode = currencyCode;
-    
-    
-   //console.log('renderCurrencyCode: ' + renderCurrencyCode);
-   //console.log(currencyCodeObject[currencyCode].country);
-   //console.log(renderCodeObj);
-   listArr.push(<CurrencyOption key={renderCurrencyCode} onClick={handlerFunction} renderCode={renderCodeObj} currencyCode={renderCurrencyCode}/>)
+  listArr.push(<CurrencyOption key={renderCurrencyCode} onClick={handlerFunction} renderCode={renderCodeObj} currencyCode={renderCurrencyCode}/>)
   };
   return listArr;
 }
@@ -47,11 +43,12 @@ class Currency$ extends React.Component {
     this.state = {
       selectedCurrencyName : 'EURO',
       selectedCurrencyCode : 'EUR',
-      selectedCurrencyCountry : 'European Union'
+      selectedCurrencyCountry : 'European Union',
+      currencyAmount : '1'
     };
 
     this.handleSelection = this.handleSelection.bind(this);
-      
+    this.handleInput = this.handleInput.bind(this);  
     }
 
     handleSelection (event) {
@@ -68,7 +65,14 @@ class Currency$ extends React.Component {
       this.setState({ selectedCurrencyCode: selectedCode });
     }
 
-   
+    componentDidMount () {
+    
+    }
+
+    handleInput (e) {
+      const amount = (e.target.validity.valid) ? e.target.value : this.state.currencyAmount;
+      this.setState({ currencyAmount : amount });
+    }
 
     render () {
       return (
@@ -94,7 +98,7 @@ class Currency$ extends React.Component {
                 <p>{this.state.selectedCurrencyCode}</p>
               </div>
               <div id="currency_amount">
-                  <input placeholder="1" type="number"></input>
+                  <input placeholder="0" id="currencyInput" value={this.state.currencyAmount} type="text" pattern="[0-9.]*" onInput={this.handleInput}></input>
               </div>
             </div>
           </div>

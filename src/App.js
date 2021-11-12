@@ -30,106 +30,96 @@ let ratesObj = {
 };
 let ratesArr = undefined;
 
-/*
-const fetchDaylyRates = () => {
-  
-  fetch(`https://altexchangerateapi.herokuapp.com/latest`)
-    .then(checkStatus)
-    .then(json)
-    .then((data) => {
-      //ratesObj = data;
-      if (data) {
-        //console.log(data);
-        const { rates } = data;
-        ratesArr = Object.entries(rates);
-        console.log(ratesArr);
-        console.log(ratesObj); 
-      }
-    })
-    .catch((error) => {
-      
-      console.log(error);
-    })
-}
-
-*/
-
-
-
-
 $(document).ready(function(){
   ratesObj.fetch()
-  let test = ratesObj.container;
-  console.log(ratesObj.container);
 });
 
-const App = () => {
-  return (
-    <Router>
-      <div className="App">                
-          
-          <nav className="navbar fixed-top navbar-light main_frame" >
-          
-            <Link className="navbar-brand px-2" to="/">
-              ExRates
-            </Link>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      link: 'baseCurrencyNav',
+    };
+
+    
+    this.getId = this.getId.bind(this);
+  }
+  
+  getId(thisId) {
+    let linkName = thisId;
+    this.setState({ link : linkName });
+    console.log('linkName: ' + linkName);
+    console.log('clicked!');
+  } 
+
+  render() {
+
+    return (
+      <Router>
+        <div className="App">                
             
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-outline-primary">
-              <Link className="nav-link" to="/">
-                <input type="radio" name="options" id="option1" autocomplete="off"></input>
-                Base Currency</Link>
-              </label>
-              <label class="btn btn-outline-primary">
-              <Link className="nav-link" to="/pair$">
-                <input type="radio" name="options" id="option2" autocomplete="off"></input>
-                Pair Comparison</Link>
-              </label>              
-            </div>
-            <div>
-              <div className="dropdown">
-                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown button 
-                </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a className="dropdown-item" href="#">Action</a>
-                  <a className="dropdown-item" href="#">Another action</a>
-                  <a className="dropdown-item" href="#">Something else here</a>
+            <nav className="navbar fixed-top navbar-light main_frame" >
+            
+              <Link className="navbar-brand px-2" to="/">
+                ExRates
+              </Link>
+              
+              <ul className="nav nav-pills">
+                <li className="nav-item">
+                  <Link id="baseCurrencyNav" className="nav-link active"  to="/">Base Currency</Link>
+                </li>
+                <li className="nav-item">
+                  <Link id="pairComparisonNav" className="nav-link" to="/pair$">Pair Comparison</Link>
+                </li>
+              </ul>
+
+
+              
+              <div>
+                <div className="dropdown">
+                  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button 
+                  </button>
+                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a className="dropdown-item" href="#">Action</a>
+                    <a className="dropdown-item" href="#">Another action</a>
+                    <a className="dropdown-item" href="#">Something else here</a>
+                  </div>
                 </div>
+              </div>          
+
+            </nav>
+
+
+
+            <Switch>
+              <Route path="/" exact component={Base$} />
+              <Route path="/pair$" component={Pair$} />
+            </Switch>
+            
+
+            
+
+            
+
+          <footer className="footer_wrapper main_frame">
+            <div className="inner_footer">
+              <div className="copyright">
+                <p>copyright</p>
               </div>
-            </div>          
-
-          </nav>
-
-
-
-          <Switch>
-            <Route path="/" exact component={Base$} />
-            <Route path="/pair$" component={Pair$} />
-          </Switch>
-          
-
-          
-
-          
-
-        <footer className="footer_wrapper main_frame">
-          <div className="inner_footer">
-            <div className="copyright">
-              <p>copyright</p>
+              <div className="authorship">
+                <p>developed by fcTen</p>
+              </div>
+              <div className="contact">
+                <p>email social</p>
+              </div>
             </div>
-            <div className="authorship">
-              <p>developed by fcTen</p>
-            </div>
-            <div className="contact">
-              <p>email social</p>
-            </div>
-          </div>
 
-        </footer>
-      </div>
-    </Router>
-  );
+          </footer>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;

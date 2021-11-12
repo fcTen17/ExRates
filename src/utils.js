@@ -63,6 +63,10 @@ export const currencyCollection = {
       country : 'Denmark',
       currencyName : 'Danish Krone',
     },
+    EUR : {
+      country : 'European Union',
+      currencyName: 'EURO',
+    },
     GBP : {
       country : 'United Kingdom',
       currencyName : 'Pound Sterling',

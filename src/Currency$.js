@@ -40,6 +40,11 @@ const CurrencyOption = (props) => {
 class Currency$ extends React.Component {
   constructor(props) {
     super(props);
+
+    const {
+      leftCurrencyInput,
+    } = props;
+
     this.state = {
       selectedCurrencyName : 'EURO',
       selectedCurrencyCode : 'EUR',
@@ -64,6 +69,8 @@ class Currency$ extends React.Component {
 
       this.setState({ selectedCurrencyCode: selectedCode });
     }
+
+    
 
     componentDidMount () {
     
@@ -98,7 +105,7 @@ class Currency$ extends React.Component {
                 <p>{this.state.selectedCurrencyCode}</p>
               </div>
               <div id="currency_amount">
-                  <input placeholder="0" id="currencyInput" value={this.state.currencyAmount} type="text" pattern="[0-9.]*" onInput={this.handleInput}></input>
+                  <input placeholder="0" id="currencyInput" value={this.props.amount} onChange={this.props.handleChange} type="text" pattern="[0-9.]*" ></input>
               </div>
             </div>
           </div>

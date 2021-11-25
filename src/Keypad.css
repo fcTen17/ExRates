@@ -1,7 +1,7 @@
 .display {
     background-color:darkgray;
     color:black;
-    border-top: 4px solid black;
+    border-top: 1px solid black;
     border-left: 4px solid black;
     border-right: 4px solid black;
     display: flex;

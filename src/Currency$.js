@@ -1,10 +1,6 @@
 import React from 'react';
 import './Currency$.css';
-import $ from 'jquery';
 import { currencyCollection } from './utils.js'
-
-
-
 
 const currencyListRender = (  currencyCodeObject , handlerFunction ) => {
   let listArr = []; 
@@ -16,9 +12,7 @@ const currencyListRender = (  currencyCodeObject , handlerFunction ) => {
   return listArr;
 }
                                                          
-
-const CurrencyOption = (props) => {
-  
+const CurrencyOption = (props) => {  
   const {
     onClick,               
     currencyCode,
@@ -40,11 +34,6 @@ const CurrencyOption = (props) => {
 class Currency$ extends React.Component {
   constructor(props) {
     super(props);
-
-    const {
-      leftCurrencyInput,
-    } = props;
-
     this.state = {
       selectedCurrencyName : 'EURO',
       selectedCurrencyCode : 'EUR',
@@ -53,7 +42,8 @@ class Currency$ extends React.Component {
     };
 
     this.handleSelection = this.handleSelection.bind(this);
-    this.handleInput = this.handleInput.bind(this);  
+    this.handleInput = this.handleInput.bind(this);
+     
     }
 
     handleSelection (event) {
@@ -68,12 +58,9 @@ class Currency$ extends React.Component {
       console.log(currencyObj.country);
 
       this.setState({ selectedCurrencyCode: selectedCode });
-    }
-
-    
-
-    componentDidMount () {
-    
+      
+      this.props.parentCallback(selectedCode);
+        
     }
 
     handleInput (e) {
@@ -105,7 +92,7 @@ class Currency$ extends React.Component {
                 <p>{this.state.selectedCurrencyCode}</p>
               </div>
               <div id="currency_amount">
-                  <input placeholder="0" id="currencyInput" value={this.props.amount} onChange={this.props.handleChange} type="text" pattern="[0-9.]*" ></input>
+                  <input placeholder="0" id="currencyInput" value={this.props.amount} onChange={this.props.handleChange} type="text" pattern="[0-9.]*" readOnly></input>
               </div>
             </div>
           </div>
@@ -116,64 +103,3 @@ class Currency$ extends React.Component {
 
 
 export default Currency$;
-/*
-<div id="currency_container">
-          <div id="currency_inner">    
-            <div id="flag_holder">
-              <img id="currency_flag" src="/image/flags/EUR.png"></img>
-            </div>
-            <div id="currency_name">
-              <p>Bulgarian Coin</p>
-            </div>
-            <div id="currency_value">
-              <div id="currency_code">
-                <p>BGC</p>
-              </div>
-              <div id="currency_amount">
-                  <input placeholder="1" type="number"></input>
-              </div>
-            </div>
-          </div>
-          <div id="currency_inner">    
-            <div >
-              <img id="currency_flag" src="/image/flags/EUR.png"></img>
-            </div>
-            <div id="currency_name">
-              <p>Bulgarian Coin</p>
-            </div>
-            <div id="currency_value">
-              <div id="currency_code">
-                <p>BGC</p>
-              </div>
-              <div id="currency_amount">
-                  <input placeholder="1" type="number"></input>
-              </div>
-            </div>
-          </div>
-        </div>
-*/
-
-
-
-/*
-
-for (const currencyCode in currencyCollection.code) {
-                    let renderCode = currencyCollection.code[currencyCode]
-                   
-                    
-                   console.log('currencyCode: ' + currencyCode);
-                   console.log(currencyCollection.code[currencyCode].country);
-                   console.log(renderCode);
-                   return <CurrencyOption key={currencyCode} renderCode={renderCode} currencyCode={currencyCode}/>;
-                  }    
-
-
-  
-              {(() => {
-                  
-                 return currencyListRender(currencyCollection.code , this.handleSelection);
-                               
-                })()}
-
-
-*/

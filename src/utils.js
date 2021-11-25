@@ -29,6 +29,12 @@ export const fetchDaylyRates = () => {
   return ratesObj;
 }
 
+export const addBaseRate = (rateObj = {}, baseCurrencyCode) => {
+  if (!rateObj) {rateObj = {};};
+  rateObj[baseCurrencyCode] = 1;
+  return rateObj;
+}
+
 export const currencyCollection = {
   code : {
     AUD : {

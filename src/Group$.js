@@ -1,14 +1,16 @@
 import React from 'react';
 import './Group$.css';
+import './Currency$.css';
+import './Base$.css';
+import fx from 'money';
+import { json, checkStatus, addBaseRate } from './utils';
 import { currencyCollection } from './utils.js';
 import $ from 'jquery';
-
 
 const groupListRender = (  groupCollectionObject , handlerFunction ) => {
   let listArr = []; 
   for (const groupName in groupCollectionObject) {
     let renderGroupName = groupName;            
-   //console.log('renderGroupName: ' + renderGroupName); 
    listArr.push(<GroupOption key={renderGroupName} onClick={handlerFunction} groupName={renderGroupName} />)
   };
   return listArr;
@@ -41,26 +43,31 @@ const groupCollection = {
 
 const currencyCheckOptionRender = ( currencyCodeObject ) => {
   let listArr = [];
-
   for (const currencyCode in currencyCodeObject) {
     let renderCodeObj = currencyCodeObject[currencyCode];
     let renderCurrencyCode = currencyCode;
     listArr.push(<CurrencyCheckOption key={renderCurrencyCode} renderCode={renderCodeObj} currencyCode={renderCurrencyCode}/>)
   };
-
   return listArr;
 }
 
-const currencyGroupElementRender = ( groupArr ) => {
+const currencyGroupElementRender = ( groupArr, latestFetchJson , baseCurrencyCode ) => {
   let listArr = [];
+  fx.base = baseCurrencyCode;
+  fx.rates = addBaseRate(latestFetchJson.rates, baseCurrencyCode);
+  
+  
   for ( let i = 0;  i < groupArr.length; i++) {
     let renderCurrencyCode = groupArr[i]
-    let  currencyName  = currencyCollection.code[renderCurrencyCode].currencyName 
+    let currencyName  = currencyCollection.code[renderCurrencyCode].currencyName 
+    let renderCurrencyRate = fx.rates[renderCurrencyCode];
     
+    console.log(renderCurrencyCode);
+ 
     console.log(renderCurrencyCode);
     console.log(currencyName);
    
-    listArr.push(<CurrencyGroupElement key={renderCurrencyCode} currencyCode={renderCurrencyCode} currencyName={currencyName} />);
+    listArr.push(<CurrencyGroupElement key={renderCurrencyCode} currencyCode={renderCurrencyCode} currencyName={currencyName} currencyRate={renderCurrencyRate} />);
   }
   return listArr;
 }
@@ -70,17 +77,14 @@ const currencyGroupElementRender = ( groupArr ) => {
 const CurrencyGroupElement = (props) => {
   const {               
     currencyCode,
+    currencyName,
+    currencyRate,
   } = props;
 
-  const {
-    currencyName,
-  } = props;
-    
   return (    
     <div className="groupElementContainer">
-      
         <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`}></img>
-        {currencyCode} - {currencyName}      
+        {currencyName} - {currencyCode} {currencyRate}   
     </div>
   )
 }
@@ -90,8 +94,6 @@ const CurrencyCheckOption = (props) => {
   const {               
     currencyCode,
   } = props;
-
-
 
   const {
     currencyName,
@@ -131,29 +133,51 @@ class Group$ extends React.Component {
     this.state = {
       groupCollection : groupCollection,
       selectedGroup : 'MAIN',
-
+      latestFetchJson: '',
+      baseCurrencyCode: ''
     };  
     this.handleSelection = this.handleSelection.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);  
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.sayState = this.sayState.bind(this);  
   }
 
-  handleSelection(event) {
-    console.log('clicked!');
+  componentDidMount () {
+    fetch(`https://altexchangerateapi.herokuapp.com/latest?from=${this.props.baseCurrencyCode}`)
+      .then(checkStatus)
+      .then(json)
+      .then((data) => {
+        if (data) {
+          console.log(data);
+          this.setState({ latestFetchJson: data})
+          console.log(this.state.latestFetchJson);  
+        }
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+        console.log(error);
+      })
+  }
+
+  sayState () {
+    console.log(this.state.latestFetchJson);
+  }
+
+  
+  
+  
+
+  handleSelection(event) {    
     const selectedGroup = event.target.value;
     console.log('selectedGroup: ' + selectedGroup);
     this.setState( { selectedGroup : selectedGroup });
     console.log(this.state.selectedGroup);
-    
-  }
-
-  handleChangeCheck() {
-
   }
 
   handleSubmit(event) {
     event.preventDefault();
     let newGroupName = $('#newGroupNameInput').val();
     console.log('newGroupName: ' + newGroupName);
+    console.log(this.state.results);
     let checkedArr = [];
 
     $('input[type="checkbox"]:checked').each(function() {    // $(':checkbox:checked')
@@ -184,8 +208,8 @@ class Group$ extends React.Component {
         <div id="group_selection">
           <div className="dropdown">
             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Group Select
-            </button>
+              Group Select 
+            </button>            
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {groupListRender( groupCollection.type.currency , this.handleSelection )}            
             </div>
@@ -213,19 +237,16 @@ class Group$ extends React.Component {
             </div>
           </div>
         </div>
-          
-          
-        
         <div id="group_inner">
+          BASE CURRENCY: {this.props.baseCurrencyCode}
           <p>{this.state.selectedGroup}</p>
           {(() => {
             let selectedGroup = this.state.selectedGroup;
             let groupArr = groupCollection.type.currency[selectedGroup];
-            return currencyGroupElementRender(groupArr);
+            return currencyGroupElementRender( groupArr , this.props.latestFetchJson , this.props.baseCurrencyCode);
           })()}
-
         </div>
-
+        UPDATED: {this.props.date} AT 16:00 CET
       </div>
     )
   }

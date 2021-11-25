@@ -6,8 +6,26 @@ import { json, checkStatus } from './utils';
 import $ from 'jquery/dist/jquery.min.js';
 import './App.css';
 
+const fetchRates = (url, callback) => {
+  let rates;
+  fetch(url)
+  .then(checkStatus)
+  .then(json)
+  .then(data => rates = data.rates)
+  .then(() => { callback(rates) })
+  .catch((error) => {
+    console.log(error);
+  })
+}
+
+const getRates = (obj) => {
+  console.log('GET RATES!')
+};
+
+fetchRates(`https://altexchangerateapi.herokuapp.com/latest`, getRates);
+
 let ratesObj = {
-  container: {},
+  container : {},
   fetch () {
     fetch(`https://altexchangerateapi.herokuapp.com/latest`)
     .then(checkStatus)
@@ -31,7 +49,7 @@ let ratesObj = {
 let ratesArr = undefined;
 
 $(document).ready(function(){
-  ratesObj.fetch()
+  
 });
 
 class App extends React.Component {
@@ -56,14 +74,11 @@ class App extends React.Component {
 
     return (
       <Router>
-        <div className="App">                
-            
-            <nav className="navbar fixed-top navbar-light main_frame" >
-            
+        <div className="App">                  
+            <nav className="navbar fixed-top navbar-light main_frame" >           
               <Link className="navbar-brand px-2" to="/">
                 ExRates
-              </Link>
-              
+              </Link>              
               <ul className="nav nav-pills">
                 <li className="nav-item">
                   <Link id="baseCurrencyNav" className="nav-link active"  to="/">Base Currency</Link>
@@ -72,36 +87,11 @@ class App extends React.Component {
                   <Link id="pairComparisonNav" className="nav-link" to="/pair$">Pair Comparison</Link>
                 </li>
               </ul>
-
-
-              
-              <div>
-                <div className="dropdown">
-                  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button 
-                  </button>
-                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a className="dropdown-item" href="#">Action</a>
-                    <a className="dropdown-item" href="#">Another action</a>
-                    <a className="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </div>
-              </div>          
-
-            </nav>
-
-
-
+            </nav>            
             <Switch>
               <Route path="/" exact component={Base$} />
               <Route path="/pair$" component={Pair$} />
             </Switch>
-            
-
-            
-
-            
-
           <footer className="footer_wrapper main_frame">
             <div className="inner_footer">
               <div className="copyright">
@@ -114,7 +104,6 @@ class App extends React.Component {
                 <p>email social</p>
               </div>
             </div>
-
           </footer>
         </div>
       </Router>
@@ -124,17 +113,5 @@ class App extends React.Component {
 
 export default App;
 
-export { ratesObj };
-/* Pills Nav */
-/*
 
-<ul className="nav nav-pills">
-              <li className="nav-item">
-                <Link className="nav-link active" to="/">Base Currency</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/pair$">Pair Comparison</Link>
-              </li>              
-            </ul>
 
-*/

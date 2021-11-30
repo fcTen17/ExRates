@@ -1,15 +1,13 @@
 .display {
     background-color:darkgray;
     color:black;
-    border-top: 1px solid black;
-    border-left: 4px solid black;
-    border-right: 4px solid black;
+   
     display: flex;
     align-items: flex-end;
     justify-content: space-around;
     flex-direction: column;
     flex-wrap: wrap; 
-    min-height: 5rem;   
+    
 }
 
 .display .top-display {
@@ -21,7 +19,6 @@
     font-size: 2 rem;
 }
 
-
 .keypad {
     display: block;
     max-width: 400px;    
@@ -29,19 +26,18 @@
 
 
 .keypad_key_container {
-    background-color: slateblue;
+    background-color:lightgray;
     padding: 0px;    
 }
 
 .keypad_key {
     text-align: center;
-    background-color:turquoise;
-    border-radius: 50%;
-    width: 40px;
+    background-color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 90px;
     height: 40px;
-    
-    /*border-bottom: 2px solid gray;
-    border-right: 2px solid gray;*/
+    margin: 2px;
+      
 }
 
 .pressed {   

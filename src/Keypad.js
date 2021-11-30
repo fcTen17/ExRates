@@ -68,11 +68,17 @@ class Keypad extends React.Component {
     this.equalClick = this.equalClick.bind(this);
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
-    this.updateBottomDisplay = this.updateBottomDisplay.bind(this);
+    this.updateDisplay = this.updateDisplay.bind(this);
   }
 
-  updateBottomDisplay (bottomDisplayValue) {
-    this.props.parentCallback(bottomDisplayValue);
+  updateDisplay (bottomDisplayValue, topDisplayValue, operator) {
+    this.props.parentCallback(bottomDisplayValue, topDisplayValue, operator);
+    if(topDisplayValue != undefined) {
+      this.setState({ topDisplayValue : topDisplayValue });
+    }
+    if(operator != undefined) {
+      this.setState({ operator : operator});
+    }
     this.setState({ bottomDisplayValue : bottomDisplayValue });
   }
 
@@ -112,7 +118,8 @@ class Keypad extends React.Component {
       text = e
     }
     if (this.state.bottomIsResult) {
-      this.setState({ bottomDisplayValue : text });
+      this.updateDisplay(text)
+      //this.setState({ bottomDisplayValue : text });
       this.setState({ bottomIsResult : false });
       console.log('result is true');
       return
@@ -125,7 +132,7 @@ class Keypad extends React.Component {
     let displayNumber = bottomDisplayValue;
     console.log('displayNumber: ', displayNumber);
     console.log(displayNumber);
-    this.updateBottomDisplay(bottomDisplayValue)
+    this.updateDisplay(bottomDisplayValue)
     //this.setState({ bottomDisplayValue : bottomDisplayValue })
     this.setState({ bottomIsResult : false });
   }
@@ -147,10 +154,10 @@ class Keypad extends React.Component {
     result = resultString.toLocaleString();
     console.log('result after: ' + result);
     console.log('result after: ' + typeof result);
-    this.updateBottomDisplay(result)
+    this.updateDisplay(result, '', '');
     this.setState({ bottomIsResult : true });
-    this.setState({ topDisplayValue : ''});
-    this.setState({ operator : ''});
+    //this.setState({ topDisplayValue : ''});
+    //this.setState({ operator : ''});
   }
 
   deleteClick () {
@@ -161,15 +168,15 @@ class Keypad extends React.Component {
     }
     if (bottomDisplayValue) {
     let slicedBottomDisplayValue = bottomDisplayValue.slice(0, -1);
-    this.updateBottomDisplay(slicedBottomDisplayValue)
+    this.updateDisplay(slicedBottomDisplayValue)
     }
   }
 
   allClearClick() {
     console.log('allClear!');
-    this.updateBottomDisplay('');
-    this.setState({ topDisplayValue : '' });
-    this.setState({ operator : '' });
+    this.updateDisplay('', '', '');
+    //this.setState({ topDisplayValue : '' });
+    //this.setState({ operator : '' });
     this.setState({ perviousOperator : '' });
   }
 
@@ -188,18 +195,19 @@ class Keypad extends React.Component {
     if (this.state.operator) {
       console.log('operator here!');
       let result = this.operationExecution(this.state.bottomDisplayValue, this.state.topDisplayValue, this.state.operator);
-      this.setState({ bottomDisplayValue : '' });
-      this.setState({ topDisplayValue : result });
-      this.setState({ operator : operatorValue });
+      this.updateDisplay('', result, operatorValue);
+      //this.setState({ bottomDisplayValue : '' });
+      //this.setState({ topDisplayValue : result });
+      //this.setState({ operator : operatorValue });
       this.setState({ previousOperator : ''});
     }
     else {
-    this.setState({ operator : operatorValue });
+    //this.setState({ operator : operatorValue });
     this.setState({ previousOperator : operatorValue });
     let bottomDisplayValue = this.state.bottomDisplayValue;
     let topDisplayValue = bottomDisplayValue;
-    this.setState({ topDisplayValue : topDisplayValue });
-    this.updateBottomDisplay('');
+    //this.setState({ topDisplayValue : topDisplayValue });
+    this.updateDisplay('', topDisplayValue, operatorValue);
     }
   }
 
@@ -256,8 +264,7 @@ class Keypad extends React.Component {
       
       <div className= "keypad">
         <div className="display">
-          <div className="top-display" >{this.state.topDisplayValue + ' ' + this.state.operator}</div>
-          <div className="bottom-display" >{this.state.bottomDisplayValue}</div>
+         
         </div>
         <div className="row">
           <KeypadKey onClick={this.allClearClick} dataAttribute={'dataAllClear'} keyCode={'NumLock'} keyText={'AC'}/>
@@ -296,3 +303,9 @@ class Keypad extends React.Component {
 
 export default Keypad;
 
+/*
+
+<div className="top-display" >{this.state.topDisplayValue + ' ' + this.state.operator}</div>
+          <div className="bottom-display" >{this.state.bottomDisplayValue}</div>
+
+*/

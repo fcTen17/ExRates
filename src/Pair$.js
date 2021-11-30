@@ -3,6 +3,7 @@ import React from 'react';
 import Keypad from './Keypad';
 import fx from 'money';
 import { json, checkStatus, addBaseRate } from './utils';
+
 import $ from 'jquery';
 
 import './Keypad.css';
@@ -13,6 +14,8 @@ class Pair$ extends React.Component {
     super(props);
     this.state = {
       leftCurrencyDisplay : '',
+      leftCurrencyScratch : '',
+      leftCurrencyOperator: '',
       rightCurrencyDisplay: '',   
       leftCurrencyCode : 'EUR',
       rightCurrencyCode : 'EUR',
@@ -20,7 +23,7 @@ class Pair$ extends React.Component {
     };
 
     this.handleLeftCurrencyChange = this.handleLeftCurrencyChange.bind(this);
-    this.handleBotomDisplayChange = this.handleBotomDisplayChange.bind(this);  
+    this.handleDisplayChange = this.handleDisplayChange.bind(this);  
     this.handleLeftCallback = this.handleLeftCallback.bind(this);
     this.handleRightCallback = this.handleRightCallback.bind(this);
     this.convertCurrency = this.convertCurrency.bind(this);
@@ -60,6 +63,11 @@ class Pair$ extends React.Component {
     let baseCurrencyCode = childData;
     this.setState({ rightCurrencyCode : baseCurrencyCode});
     console.log('rightBase: ', baseCurrencyCode);
+    let value = Number(this.state.leftCurrencyDisplay);
+    let convertedValue = this.convertCurrency( value, this.state.leftCurrencyCode, childData, this.state.latestFetchJson);
+    let numberToString = convertedValue.toString()
+    this.setState({ rightCurrencyDisplay : numberToString });
+
   }
 
   handleLeftCurrencyChange (e) {
@@ -68,7 +76,7 @@ class Pair$ extends React.Component {
     this.setState({ leftCurrencyInput : text });
   }
 
-  handleBotomDisplayChange (bottomDisplayValue) {
+  handleDisplayChange (bottomDisplayValue, topDisplayValue, operator) {
     console.log('keypadBottomDisplay: ' + bottomDisplayValue);
     console.log('typeof: ', typeof bottomDisplayValue);
     let value = Number(bottomDisplayValue);
@@ -82,22 +90,43 @@ class Pair$ extends React.Component {
     console.log('numberToString:', numberToString);
     this.setState({ leftCurrencyDisplay : bottomDisplayValue });
     this.setState({ rightCurrencyDisplay : numberToString });
+    if (topDisplayValue != undefined) {
+      this.setState({leftCurrencyScratch : topDisplayValue});
+    }
+    if(operator != undefined) {
+      this.setState({ leftCurrencyOperator : operator});
+    }
   }
 
   render (){
     return (
-      <div className="testPair" id="pairComparison">
-        <p>Pair Comparison App <i className="fab fa-twitter"></i> </p>
-        <div id="pairContainer">
-          <div id="leftCurrency">
+      <div className="pair" id="pairComparison">
+        <div className="row" id="pairContainer">        
+          <div className="col-6 currency_box no-gutters" id="leftCurrency">
               <Currency$ amount={this.state.leftCurrencyDisplay}  parentCallback={this.handleLeftCallback} onChange={this.handleLeftCurrencyChange}/>
           </div>
-          <div id="rightCurrency">
+          <div className="col-6 currency_box no-gutters" id="rightCurrency">
               <Currency$ amount={this.state.rightCurrencyDisplay} parentCallback={this.handleRightCallback}/>
+          </div> 
+        </div>
+        <div id="displayAmount">
+          <div id="leftAmount">
+            <div>
+              {this.state.leftCurrencyScratch + ' ' + this.state.leftCurrencyOperator}
+            </div>
+            <div>
+              <input value={this.state.leftCurrencyDisplay} readOnly></input>
+            </div>
           </div>
-          <Keypad parentCallback={this.handleBotomDisplayChange}/>
-        </div>          
-      </div>
+          <div>
+            {this.state.rightCurrencyDisplay}
+          </div>
+        </div>
+        <div id="keypadContainer">
+          <Keypad parentCallback={this.handleDisplayChange}/>
+        </div>         
+      </div>          
+      
     )
   }
 };

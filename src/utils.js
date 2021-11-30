@@ -39,51 +39,51 @@ export const currencyCollection = {
   code : {
     AUD : {
       country : 'Australia',
-      currencyName : 'Australian Dollar'
+      currencyName : 'Australian dollar'
     },
     BGN : {
       country : 'Bulgaria',
-      currencyName : 'Bulgarian Lev',
+      currencyName : 'Bulgarian lev',
     },
     BRL : {
       country : 'Brazil',
-      currencyName : 'Brazilian Real',
+      currencyName : 'Brazilian real',
     },
     CAD : {
       country : 'Canada',
-      currencyName : 'Canadian Dollar',
+      currencyName : 'Canadian dollar',
     },
     CHF : {
-      country : 'Swiss',
-      currencyName : 'Swiss Franc',
+      country : 'Switzeland',
+      currencyName : 'Swiss franc',
     },
     CNY : {
       country : 'China',
-      currencyName : 'Yuan Renminbi',
+      currencyName : 'Yuan renminbi',
     },
     CZK : {
       country : 'Czech Republic',
-      currencyName : 'Czech Koruna',
+      currencyName : 'Czech koruna',
     },
     DKK : {
       country : 'Denmark',
-      currencyName : 'Danish Krone',
+      currencyName : 'Danish krone',
     },
     EUR : {
       country : 'European Union',
-      currencyName: 'EURO',
+      currencyName: 'Euro',
     },
     GBP : {
       country : 'United Kingdom',
-      currencyName : 'Pound Sterling',
+      currencyName : 'Pound sterling',
     },
     HKD : {
       country : 'Hong Kong',
-      currencyName : 'Hong Kong Dollar',
+      currencyName : 'Hong Kong dollar',
     },
     HRK : {
       country : 'Croatia',
-      currencyName : 'Croatian Kuna',
+      currencyName : 'Croatian kuna',
     },
     HUF : {
       country : 'Hungary',
@@ -95,15 +95,15 @@ export const currencyCollection = {
     },
     ILS : {
       country : 'Israel',
-      currencyName : 'New Israeli Shequel',
+      currencyName : 'New israeli shequel',
     },
     INR : {
       country : 'India',
-      currencyName : 'Indian Rupee',
+      currencyName : 'Indian rupee',
     },
     ISK : {
       country : 'Iceland',
-      currencyName : 'Iceland Krona',
+      currencyName : 'Iceland krona',
     },
     JPY : {
       country : 'Japan',
@@ -115,23 +115,23 @@ export const currencyCollection = {
     },
     MXN : {
       country : 'Mexico',
-      currencyName : 'Mexican Peso',
+      currencyName : 'Mexican peso',
     },
     MYR : {
       country : 'Malaysia',
-      currencyName : 'Malaysian Ringgit',
+      currencyName : 'Malaysian ringgit',
     },
     NOK : {
       country : 'Norway',
-      currencyName : 'Norwegian Krone',
+      currencyName : 'Norwegian krone',
     },
     NZD : {
       country : 'New Zealand',
-      currencyName : 'New Zealand Dollar',
+      currencyName : 'New Zealand dollar',
     },
     PHP : {
       country : 'Phillipines',
-      currencyName : 'Phillipines Peso',
+      currencyName : 'Phillipines peso',
     },
     PLN : {
       country : 'Poland',
@@ -139,19 +139,19 @@ export const currencyCollection = {
     },
     RON : {
       country : 'Romania',
-      currencyName : 'New Romanian Leu',
+      currencyName : 'New Romanian leu',
     },
     RUB : {
       country : 'Russian Federation',
-      currencyName : 'Russian Ruble',
+      currencyName : 'Russian ruble',
     },
     SEK : {
       country : 'Sweden',
-      currencyName : 'Swedish Krone',
+      currencyName : 'Swedish krone',
     },
     SGD : {
       country : 'Sudan',
-      currencyName : 'Sudanese Pound',
+      currencyName : 'Sudanese pound',
     },
     THB : {
       country : 'Thailand',
@@ -159,15 +159,15 @@ export const currencyCollection = {
     },
     TRY : {
       country : 'Turkey',
-      currencyName : 'Turkish Lira',
+      currencyName : 'Turkish lira',
     },
     USD : {
       country : 'United States',
-      currencyName : 'US Dollar',
+      currencyName : 'US dollar',
     },
     ZAR : {
       country : 'South Africa',
-      currencyName : 'South African Rand',
+      currencyName : 'South african rand',
     },
   }
 } 

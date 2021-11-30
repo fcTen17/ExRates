@@ -1,17 +1,30 @@
 #currency_container {
-    display: flex;
-    background-color: yellowgreen;
-    margin: 16px 8px;
-    width: 300px;
+    background-color:slategray;
+    border: 2px solid black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 #currency_inner {
     display: flex;
+    background-color:whitesmoke;
+    margin: 2px auto;
+}
+
+#flag_holder{
+    display: flex;
     flex-direction: column;
-    background-color: wheat;
-    width: 300px;
-    height: 295px;
-    margin: 20px auto;
+    align-items: center;     
+}
+
+#currency_code {
+    margin-bottom: 0;
+    font-size: 4rem;
+}
+
+#currency_country{
+    font-size: 0.6rem;
+    margin-bottom: 0;
+    font-weight: 600;
 }
 
 #currency_name p {
@@ -21,13 +34,21 @@
 
 .dropdown {
     display: flex;
-    justify-content: center;    
+    justify-content: center;
+    margin: 0;
+    padding: 0;    
 }
 
-.currency_select{
+.currency_select {
+    padding: 0;
+}
+
+.currency_select p {
     justify-content: center;
-    width: 300px;
-    background-color:mediumturquoise;
+    width: 100%;
+    background-color: whitesmoke;
+    font-size: 1rem;
+    border: 1px solid black;    
 }
 
 .small_flag {
@@ -36,7 +57,7 @@
 }
 
 #currency_flag {
-    width: 300px;
+    height: 70px;
 }
 
 #currency_code >p {
@@ -48,16 +69,6 @@
 
 #currency_amount {
     display: inline-block;
-}
-
-#currency_amount input {
-    width: 220px;
-    height: 30px;
-    color: yellow;
-    background-color: black;
-    margin-top: 10px;
-    margin-left: 5px;
-    text-align: right;
 }
 
 #currency_value {

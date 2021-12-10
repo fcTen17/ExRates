@@ -40,20 +40,6 @@ class App extends React.Component {
               <Route path="/pair$" component={Pair} />
             </Switch>
           </div>
-          <footer className="footer_wrapper main_frame">
-            <div className="inner-footer">
-              <div className="inner-element copyright">
-                <i>copyright &copy; 2021</i>
-              </div>
-              <div className="inner-element authorship">
-                <i>developed by fcTen</i>
-              </div>
-              <div className="contact">
-                <a href="https://github.com/fcTen17"><i className="fab fa-github"></i></a>
-                <a href="http://linkedin.com/in/fernando-cesar-tenório-206a0a2b"><i className="fab fa-linkedin"></i></a>              
-              </div>
-            </div>
-          </footer>
         </div>
       </Router>
     );

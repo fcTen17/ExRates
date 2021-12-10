@@ -52,6 +52,18 @@ class Base extends React.Component {
             <Currency parentCallback={this.handleCallback}/>
           </div>          
           <Group baseCurrencyCode={this.state.baseCurrencyCode} latestFetchJson={this.state.latestFetchJson} date={this.state.latestFetchJson.date}/>
+          <div className="inner-footer">
+            <div className="inner-element copyright">
+              <i>copyright &copy; 2021</i>
+            </div>
+            <div className="inner-element authorship">
+              <i>developed by fcTen</i>
+            </div>
+            <div className="contact">
+              <a href="https://github.com/fcTen17"><i className="fab fa-github"></i></a>
+              <a href="http://linkedin.com/in/fernando-cesar-tenório-206a0a2b"><i className="fab fa-linkedin"></i></a>              
+            </div>
+          </div>
         </div>
       )
     }

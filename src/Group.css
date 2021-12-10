@@ -28,7 +28,7 @@
 
 .check-option-container {
     display: flex;
-    justify-content:flex-start;
+    justify-content:space-between;
 }
 
 .small-flag {
@@ -47,6 +47,7 @@
     background-color: black;
     color: white;
     overflow-y: scroll;
+    max-height: 400px;
 }
 
 .group-inner p span {
@@ -72,7 +73,7 @@
 
 .group-element-rate span {
     padding-inline: .5rem;
-    margin-left: 5rem;
+    
     text-align:left;
 }
 

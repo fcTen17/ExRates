@@ -12,10 +12,14 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-height: 100%;
+    
     background-color: rgb(226, 247, 247) ;
   }
   
+  html, body {
+    min-height: 100%;
+  }
+
   .main_frame {
     background-color:darkslategray;
     opacity: 0.6;
@@ -61,29 +65,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('./image/marjan-blan-marjanblan-6bXvYyAYVrE-unsplash.jpg');
-    background-size: cover;
+    background-image: linear-gradient(180deg, #f5faf8 45.71%, #dcfaef 45.71%, #dcfaef 50%, #f5faf8 50%, #f5faf8 95.71%, #dcfaef 95.71%, #dcfaef 100%);
+    background-size: 70.00px 70.00px;
     padding:0;
     margin:0;
   }
-  
-  /* Footer */
-  
-  footer {
-    width: 100vw;
-    display: block;
-    position:absolute;
-    bottom: 0;
-    overflow: hidden;
-    padding: 10px 0;
-    box-sizing: border-box;
-    font-size: 0.7rem;
-  }
+ 
+
+  /* Component Footer */
   
   .inner-footer {
     display: flex;
     justify-content: space-between;
     margin: 0 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 0.7rem;
   }
   
   .inner-element {
@@ -105,17 +101,5 @@
     color:  paleturquoise;
   }
   
-  @media (max-width: 600px ) {
-    footer {
-        padding: 0;
-    }
-    
-    .inner-element {
-        padding-top: 2px;
-    }
-
-    .contact {
-        font-size: 1.0rem;
-    }
-  }
+  
   

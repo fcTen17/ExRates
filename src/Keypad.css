@@ -19,11 +19,16 @@
     font-size: 2 rem;
 }
 
+@keyframes touch {
+    0%   {background-color: azure;}    
+    50%  {background-color: tomato;}
+    100% {background-color: azure;}
+  }
+
 .keypad {
     display: block;
     max-width: 400px;    
 }
-
 
 .keypad_key_container {
     padding: 0px;    
@@ -32,16 +37,19 @@
 .keypad_key {
     text-align: center;
     font-size: 1.5rem;
+    text-decoration: none;
     background-color:azure;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     width: 80px;
     height: 40px;
-    margin: 2px;
+    margin: 5px;
     border-radius: 8px;     
 }
 
 .keypad_key:hover {
-    background-color: tomato;
+    animation-name: touch;
+    animation-duration: 1s;
+    text-decoration: none;
 }
 
 .double {

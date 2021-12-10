@@ -1,56 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { Base$ } from './Base$';
-import { Pair$ } from './Pair$';
-import { json, checkStatus } from './utils';
-import $ from 'jquery/dist/jquery.min.js';
+import { Base } from './Base';
+import { Pair } from './Pair';
 import './App.css';
-
-const fetchRates = (url, callback) => {
-  let rates;
-  fetch(url)
-  .then(checkStatus)
-  .then(json)
-  .then(data => rates = data.rates)
-  .then(() => { callback(rates) })
-  .catch((error) => {
-    console.log(error);
-  })
-}
-
-const getRates = (obj) => {
-  console.log('GET RATES!')
-};
-
-fetchRates(`https://altexchangerateapi.herokuapp.com/latest`, getRates);
-
-let ratesObj = {
-  container : {},
-  fetch () {
-    fetch(`https://altexchangerateapi.herokuapp.com/latest`)
-    .then(checkStatus)
-    .then(json)
-    .then((data) => {
-      this.container = data;
-      if (data) {
-        //console.log(data);
-        const { rates } = data;
-        ratesArr = Object.entries(rates);
-        console.log(ratesArr);
-        console.log(ratesObj); 
-      }
-    })
-    .catch((error) => {
-      
-      console.log(error);
-    })
-  }
-};
-let ratesArr = undefined;
-
-$(document).ready(function(){
-  
-});
 
 class App extends React.Component {
   constructor(props) {
@@ -60,48 +12,45 @@ class App extends React.Component {
     };
 
     
-    this.getId = this.getId.bind(this);
+    
   }
   
-  getId(thisId) {
-    let linkName = thisId;
-    this.setState({ link : linkName });
-    console.log('linkName: ' + linkName);
-    console.log('clicked!');
-  } 
 
   render() {
 
     return (
       <Router>
         <div className="App">                  
-            <nav className="navbar fixed-top navbar-light main_frame" >           
-              <Link className="navbar-brand px-2" to="/">
-                ExRates
-              </Link>              
-              <ul className="nav nav-pills">
-                <li className="nav-item">
-                  <Link id="baseCurrencyNav" className="nav-link active"  to="/">Base Currency</Link>
-                </li>
-                <li className="nav-item">
-                  <Link id="pairComparisonNav" className="nav-link" to="/pair$">Pair Comparison</Link>
-                </li>
-              </ul>
-            </nav>            
+          <nav className="navbar fixed-top main_frame" >           
+            <Link className="navbar-brand px-2" to="/">
+              <span><i className="fas fa-globe"></i> GLOBAL RATES</span>
+            </Link>              
+            <ul className="nav">
+              <li className="nav-item">
+                <Link id="baseCurrencyNav" className="nav-link"  to="/">Base Currency</Link>
+              </li>
+              <li className="nav-item">
+                <Link id="pairComparisonNav" className="nav-link" to="/pair$">Pair Comparison</Link>
+              </li>
+            </ul>
+          </nav>
+          <div className="app-container">            
             <Switch>
-              <Route path="/" exact component={Base$} />
-              <Route path="/pair$" component={Pair$} />
+              <Route path="/" exact component={Base} />
+              <Route path="/pair$" component={Pair} />
             </Switch>
+          </div>
           <footer className="footer_wrapper main_frame">
-            <div className="inner_footer">
-              <div className="copyright">
-                <p>copyright</p>
+            <div className="inner-footer">
+              <div className="inner-element copyright">
+                <i>copyright &copy; 2021</i>
               </div>
-              <div className="authorship">
-                <p>developed by fcTen</p>
+              <div className="inner-element authorship">
+                <i>developed by fcTen</i>
               </div>
               <div className="contact">
-                <p>email social</p>
+                <a href="https://github.com/fcTen17"><i className="fab fa-github"></i></a>
+                <a href="http://linkedin.com/in/fernando-cesar-tenório-206a0a2b"><i className="fab fa-linkedin"></i></a>              
               </div>
             </div>
           </footer>

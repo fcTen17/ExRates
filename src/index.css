@@ -12,31 +12,51 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-top: 80px;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  height: 100vh;
+  
+  background-color: rgb(226, 247, 247) ;
 }
 
 .main_frame {
-  background-color:rgb(146, 219, 241);
-  
+  background-color:darkslategray;
+  opacity: 0.6;
+  color: white;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+
+
+/* Navbar */
+.navbar-brand {
+  color: white;
+}
+
+.navbar-brand:hover {
+  color:paleturquoise;
+}
+
+
 
 .nav-link {
   color: white;
 }
 
 .nav-link:hover {
-  color: white;
+  color: paleturquoise;
 }
 
-/* Navbar */
+/* App Container */
 
-
-
+.app-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('./image/marjan-blan-marjanblan-6bXvYyAYVrE-unsplash.jpg');
+  background-size: cover;
+  height: 100vh;
+  padding:0;
+  margin:0;
+}
 
 /* Footer */
 
@@ -44,17 +64,35 @@ footer {
   width: 100vw;
   display: block;
   position:absolute;
-  bottom:0;
+  bottom: 0;
   overflow: hidden;
-  padding: 30px 0;
+  padding: 10px 0;
   box-sizing: border-box;
-  
+  font-size: 0.7rem;
 }
 
-.inner_footer {
+.inner-footer {
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  height: 100%;
+  margin: 0 20px;
+}
+
+.inner-element {
+  padding: 10px;
+}
+
+.contact {
+  display: flex;
+  width: 4rem;
+  justify-content: space-between;
+  font-size: 1.4rem;
+}
+
+.contact a{
+  color: white;
+}
+
+.contact a:hover{
+  color:  paleturquoise;
 }
 

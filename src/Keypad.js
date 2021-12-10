@@ -12,6 +12,8 @@ const KeypadKey = (props) => {
     keyCode,
     keyText,
     onClick,
+    colNumber,
+    double,
   } = props;
   
   let dataNumberRequired = false;
@@ -39,8 +41,8 @@ const KeypadKey = (props) => {
   }
 
   return (
-    <div className="col-3 .g-0 keypad_key_container">
-      <button className="keypad_key" data-number={dataNumberRequired} data-operator={dataOperatorRequired} data-delete={dataDeleteRequired} data-all-clear={dataAllClearRequired} data-equal={dataEqualRequired} onClick={onClick} id={`${keyCode}_keypad_key`}>
+    <div className={`col-${colNumber} .g-0 keypad_key_container`}>
+      <button className={`keypad_key ${double}`} data-number={dataNumberRequired} data-operator={dataOperatorRequired} data-delete={dataDeleteRequired} data-all-clear={dataAllClearRequired} data-equal={dataEqualRequired} onClick={onClick} id={`${keyCode}_keypad_key`}>
           {keyText}
       </button>
     </div>
@@ -72,19 +74,26 @@ class Keypad extends React.Component {
   }
 
   updateDisplay (bottomDisplayValue, topDisplayValue, operator) {
-    this.props.parentCallback(bottomDisplayValue, topDisplayValue, operator);
-    if(topDisplayValue != undefined) {
+    this.props.parentCallback(Number(bottomDisplayValue), topDisplayValue, operator);
+    if(topDisplayValue !== undefined) {
       this.setState({ topDisplayValue : topDisplayValue });
     }
-    if(operator != undefined) {
+    if(operator !== undefined) {
       this.setState({ operator : operator});
     }
     this.setState({ bottomDisplayValue : bottomDisplayValue });
   }
 
-  keyDown = (keyPressed) => {
-    let element = $(`#${keyPressed}_keypad_key`);
-    if (keyPressed === 'NumpadEnter') {
+  keyDown = (keyPressedCode, keyPressedKey) => {
+    let element;
+    if (keyPressedKey === '0') {
+      element = $(`#${keyPressedKey}_keypad_key`);
+    } else if (Number(keyPressedKey)) {
+      element = $(`#${keyPressedKey}_keypad_key`);
+    } else {
+      element = $(`#${keyPressedCode}_keypad_key`);
+    }
+    if (keyPressedCode === 'NumpadEnter') {
       element = $('#NumpadEqual_keypad_key');
     }
     element.addClass('pressed');
@@ -102,62 +111,55 @@ class Keypad extends React.Component {
     }
   }
 
-  keyUp = (keyPressed) => {
-    $(`#${keyPressed}_keypad_key`).removeClass('pressed');
-    if (keyPressed === 'NumpadEnter') {
+  keyUp = (keyPressedCode, keyPressedKey) => {
+    let element;
+    if (keyPressedKey === '0') {
+      element = $(`#${keyPressedKey}_keypad_key`);
+    } else if (Number(keyPressedKey)) {
+      element = $(`#${keyPressedKey}_keypad_key`);
+    } else {
+      element = $(`#${keyPressedCode}_keypad_key`);
+    }
+    if (keyPressedCode === 'NumpadEnter') {
+      element = $('#NumpadEqual_keypad_key');
+    }
+    element.removeClass('pressed');
+    if (keyPressedCode === 'NumpadEnter') {
       $('#NumpadEqual_keypad_key').removeClass('pressed');
     }
   }
   
-  handleNumberClick (e) {
+  handleNumberClick (e) {  
     let text;
     if (e.hasOwnProperty('target')) {
-      console.log('event has target')
       text = e.target.innerText;
     } else {
       text = e
     }
     if (this.state.bottomIsResult) {
-      this.updateDisplay(text)
-      //this.setState({ bottomDisplayValue : text });
+      this.updateDisplay(text);
       this.setState({ bottomIsResult : false });
-      console.log('result is true');
       return
     }
     if (text === '.' && this.state.bottomDisplayValue.includes('.')) {
       return
     };
     let bottomDisplayValue = this.state.bottomDisplayValue + text;
-
-    let displayNumber = bottomDisplayValue;
-    console.log('displayNumber: ', displayNumber);
-    console.log(displayNumber);
     this.updateDisplay(bottomDisplayValue)
-    //this.setState({ bottomDisplayValue : bottomDisplayValue })
     this.setState({ bottomIsResult : false });
   }
 
-  equalClick () {
-    let bottomDisplay = this.state.bottomDisplayValue;
+  equalClick () {    
     let topDisplay = this.state.topDisplayValue;
     let operator = this.state.operator;
     if (!operator && !topDisplay && !operator) {
       return
     }
-    console.log('bottom: ' + typeof bottomDisplay);
-    console.log('top: ' + typeof topDisplay);
-    console.log('operator: ' + typeof operator);
     let result = this.operationExecution(this.state.bottomDisplayValue, this.state.topDisplayValue, this.state.operator);
-    console.log('result: ' + result);
-    console.log('result: ' + typeof result);
     let resultString = result.toString();
     result = resultString.toLocaleString();
-    console.log('result after: ' + result);
-    console.log('result after: ' + typeof result);
     this.updateDisplay(result, '', '');
     this.setState({ bottomIsResult : true });
-    //this.setState({ topDisplayValue : ''});
-    //this.setState({ operator : ''});
   }
 
   deleteClick () {
@@ -173,10 +175,7 @@ class Keypad extends React.Component {
   }
 
   allClearClick() {
-    console.log('allClear!');
     this.updateDisplay('', '', '');
-    //this.setState({ topDisplayValue : '' });
-    //this.setState({ operator : '' });
     this.setState({ perviousOperator : '' });
   }
 
@@ -186,27 +185,20 @@ class Keypad extends React.Component {
     }
     let  operatorValue;
     if (e.hasOwnProperty('target')) {
-      console.log('event has target')
       operatorValue = e.target.innerText;
     } else {
       operatorValue = e
     }
     
     if (this.state.operator) {
-      console.log('operator here!');
       let result = this.operationExecution(this.state.bottomDisplayValue, this.state.topDisplayValue, this.state.operator);
       this.updateDisplay('', result, operatorValue);
-      //this.setState({ bottomDisplayValue : '' });
-      //this.setState({ topDisplayValue : result });
-      //this.setState({ operator : operatorValue });
       this.setState({ previousOperator : ''});
     }
     else {
-    //this.setState({ operator : operatorValue });
     this.setState({ previousOperator : operatorValue });
     let bottomDisplayValue = this.state.bottomDisplayValue;
     let topDisplayValue = bottomDisplayValue;
-    //this.setState({ topDisplayValue : topDisplayValue });
     this.updateDisplay('', topDisplayValue, operatorValue);
     }
   }
@@ -232,7 +224,6 @@ class Keypad extends React.Component {
       default :
         return
     }
-    console.log('result: ' + result);
     return result;
   }
 
@@ -242,14 +233,12 @@ class Keypad extends React.Component {
     $(window).on('keydown', (e) => {
       let keyPressedCode = e.originalEvent.code;
       let keyPressedKey = e.originalEvent.key;
-      console.log('KeyCode: ' + keyPressedCode);
-      console.log('KeyKey: ' + keyPressedKey);
-
-      this.keyDown(keyPressedCode);            
+      this.keyDown(keyPressedCode , keyPressedKey);            
     }); 
     $(window).on('keyup', (e) => {
       let keyPressedCode = e.originalEvent.code;
-      this.keyUp(keyPressedCode);
+      let keyPressedKey = e.originalEvent.key;
+      this.keyUp(keyPressedCode, keyPressedKey);
     });
   };
 
@@ -267,34 +256,33 @@ class Keypad extends React.Component {
          
         </div>
         <div className="row">
-          <KeypadKey onClick={this.allClearClick} dataAttribute={'dataAllClear'} keyCode={'NumLock'} keyText={'AC'}/>
-          <KeypadKey onClick={this.operatorClick} dataAttribute={'dataOperator'} keyCode={'NumpadDivide'} keyText={divide}/>
-          <KeypadKey onClick={this.operatorClick} dataAttribute={'dataOperator'} keyCode={'NumpadMultiply'} keyText={multiply}/>
-          <KeypadKey onClick={this.deleteClick} dataAttribute={'dataDelete'} keyCode={'Backspace'} keyText={'del'}/>
+          <KeypadKey onClick={this.allClearClick} dataAttribute={'dataAllClear'} keyCode={'NumLock'} keyText={'AC'} double={''}/>
+          <KeypadKey onClick={this.operatorClick} dataAttribute={'dataOperator'} keyCode={'NumpadDivide'} keyText={divide} double={''}/>
+          <KeypadKey onClick={this.operatorClick} dataAttribute={'dataOperator'} keyCode={'NumpadMultiply'} keyText={multiply} double={''}/>
+          <KeypadKey onClick={this.deleteClick} dataAttribute={'dataDelete'} keyCode={'Backspace'} keyText={'del'} double={''}/>
         </div>
         <div className="row">
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad7'} keyText={'7'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad8'} keyText={'8'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad9'} keyText={'9'}/>
-          <KeypadKey onClick={this.operatorClick} dataAttribute={'dataOperator'} keyCode={'NumpadSubtract'} keyText={'-'}/>        
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'7'} keyText={'7'} double={''}/>
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'8'} keyText={'8'} double={''}/>
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'9'} keyText={'9'} double={''}/>
+          <KeypadKey onClick={this.operatorClick} dataAttribute={'dataOperator'} keyCode={'NumpadSubtract'} keyText={'-'} double={''}/>        
         </div>
         <div className="row">
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad4'} keyText={'4'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad5'} keyText={'5'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad6'} keyText={'6'}/>
-          <KeypadKey onClick={this.operatorClick} dataAttribute={'dataOperator'} keyCode={'NumpadAdd'} keyText={'+'}/>
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'4'} keyText={'4'} double={''}/>
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'5'} keyText={'5'} double={''}/>
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'6'} keyText={'6'} double={''}/>
+          <KeypadKey onClick={this.operatorClick} dataAttribute={'dataOperator'} keyCode={'NumpadAdd'} keyText={'+'} double={''}/>
         </div>
         <div className="row">
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad1'} keyText={'1'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad2'} keyText={'2'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad3'} keyText={'3'}/>
-          <KeypadKey onClick={this.equalClick} dataAttribute={'dataEqual'} keyCode={'NumpadEqual'} keyText={'='}/>      
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'1'} keyText={'1'} double={''}/>
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'2'} keyText={'2'} double={''}/>
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'3'} keyText={'3'} double={''}/>
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'NumpadDecimal'} keyText={'.'} double={''}/>
+                
         </div>
-        <div className="row">
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'FAV'} keyText={'FAV'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'Numpad0'} keyText={'0'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'NumpadDecimal'} keyText={'.'}/>
-          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'%'} keyText={'%'}/>
+        <div className="row">  
+          <KeypadKey onClick={this.handleNumberClick} dataAttribute={'dataNumber'} keyCode={'0'} keyText={'0'} colNumber={'6'} double={'double'}/>
+          <KeypadKey onClick={this.equalClick} dataAttribute={'dataEqual'} keyCode={'NumpadEqual'} keyText={'='} colNumber={'6'} double={'double'}/>  
         </div>
       </div>    
     )
@@ -302,10 +290,3 @@ class Keypad extends React.Component {
 }
 
 export default Keypad;
-
-/*
-
-<div className="top-display" >{this.state.topDisplayValue + ' ' + this.state.operator}</div>
-          <div className="bottom-display" >{this.state.bottomDisplayValue}</div>
-
-*/

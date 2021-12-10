@@ -1,0 +1,89 @@
+.group-wrapper {
+    border-radius: 8px;
+    background-color: azure;
+    margin-bottom: 8px;
+}
+
+.group-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 6px ;
+}
+
+.group_buttons {
+    display: flex;
+    justify-content:space-between;
+    margin: 0 auto;
+}
+
+#newGroupCheckOptionContainer {
+    overflow-y: scroll;
+    max-height: 150px;    
+}
+
+.group-add-form {
+    padding: 8px 16px;
+}
+
+.check-option-container {
+    display: flex;
+    justify-content:flex-start;
+}
+
+.small-flag {
+    height: 25px;
+}
+
+.form-check-input {
+    margin: 0;
+}
+
+.group-inner{
+    padding: 4px;
+    margin: 4px;
+    background-color: black;
+    color: white;
+    overflow-y: scroll;
+    height: 200px;
+}
+
+.group-inner p span {
+    color: greenyellow;
+}
+
+.group-element {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+
+.group-element-flag-code-name span {
+    padding: 0.3rem;
+}
+
+.group-element-rate {
+    padding: 0.3rem;
+    color: paleturquoise;
+}
+
+.group-element-rate span {
+    padding-inline: .5rem;
+    margin-left: 9rem;
+    text-align:left;
+}
+
+.group-update {
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin: 0.2rem;
+}
+
+.disclaimer {
+    font-size: 0.8rem;
+    font-weight: 200;
+    padding: 0.3rem;
+    margin: 0.2rem;
+    color: gray
+  }

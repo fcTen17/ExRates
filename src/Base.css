@@ -1,0 +1,22 @@
+.base-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 400px;
+    padding: 4px;
+    opacity: 0.95;
+    border-radius: 20px;
+    border: 2px solid black;
+    background-color: darkslategray;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.list {
+    overflow-y: scroll;
+    max-height: 150px;   
+}
+
+.base-head {
+    display: flex;
+    justify-content: center;    
+}

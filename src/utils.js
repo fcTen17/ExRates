@@ -167,7 +167,7 @@ export const currencyCollection = {
     },
     ZAR : {
       country : 'South Africa',
-      currencyName : 'South african rand',
+      currencyName : 'South African rand',
     },
   }
 } 

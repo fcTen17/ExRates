@@ -1,5 +1,5 @@
 .display {
-    background-color:darkgray;
+   
     color:black;
    
     display: flex;
@@ -26,24 +26,23 @@
 
 
 .keypad_key_container {
-    background-color:lightgray;
     padding: 0px;    
 }
 
 .keypad_key {
     text-align: center;
-    background-color: white;
+    background-color:azure;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    width: 90px;
+    width: 80px;
     height: 40px;
     margin: 2px;
-      
+    border-radius: 8px;     
+}
+
+.double {
+    width: 163px;
 }
 
 .pressed {   
     background-color: tomato;
-    /*border-left: 2px solid black;
-    border-top: 2px solid black;
-    border-bottom: 2px solid slateblue;
-    border-right: 2px solid slateblue;*/
 }

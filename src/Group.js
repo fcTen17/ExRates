@@ -155,11 +155,14 @@ class Group extends React.Component {
   }
 
   mountGroupCollection = (groupCollection , savedUserGroups) => {
-    let groupArr = savedUserGroups.split('-');
-    for ( let i = 0; i < groupArr.length ; i++ ) {
-      let elementsArr = groupArr[i].split(',');
-      let groupName = elementsArr.shift();
-      groupCollection.type.currency[groupName] = elementsArr;
+    if (savedUserGroups) {
+      console.log('savedUserGroups is truthy.');
+      let groupArr = savedUserGroups.split('-');
+      for ( let i = 0; i < groupArr.length ; i++ ) {
+        let elementsArr = groupArr[i].split(',');
+        let groupName = elementsArr.shift();
+        groupCollection.type.currency[groupName] = elementsArr;
+      }
     }
     this.setState({ groupCollection : groupCollection})
   }

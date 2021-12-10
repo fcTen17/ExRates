@@ -76,7 +76,7 @@ const CurrencyGroupElement = (props) => {
   } = props;
 
   return (    
-    <div className="group-element">
+    <div className="group-element group-element-container">
         <div className="group-element group-element-flag-code-name"><img className={`small-flag`} src={`/image/flags/${currencyCode}.png`} alt=""></img>
         <span>{currencyCode} - {currencyName}</span></div> <span className="group-element group-element-rate"><span>{getSymbolFromCurrency(currencyCode)}</span> {currencyRate}</span>   
     </div>
@@ -252,7 +252,6 @@ class Group extends React.Component {
                 <div id="currencyCheckOptionList">
                   CURRENCY LIST
                 </div>
-               
                 <div className="form-check" id="newGroupCheckOptionContainer">
                   {currencyCheckOptionRender( currencyCollection.code )}
                 </div>
@@ -262,7 +261,7 @@ class Group extends React.Component {
           </div>
         </div>
         <div className="group-inner">
-          
+
           <p> CURRENCY GROUP: <span>{this.state.selectedGroup}</span></p>
           {(() => {
             let selectedGroup = this.state.selectedGroup;

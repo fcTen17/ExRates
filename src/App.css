@@ -12,8 +12,7 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100vh;
-    
+    min-height: 100%;
     background-color: rgb(226, 247, 247) ;
   }
   
@@ -33,9 +32,7 @@
   .navbar-brand:hover {
     color:paleturquoise;
   }
-  
-  
-  
+    
   .nav-link {
     color: white;
   }
@@ -44,6 +41,19 @@
     color: paleturquoise;
   }
   
+  @media (max-width: 600px ) {
+    .navbar {
+        height: 2.8rem;
+    }
+    .navbar-brand span {
+        display: none;
+    }
+    .nav-item span {
+        display: none;
+    }
+
+  }
+
   /* App Container */
   
   .app-container {
@@ -95,4 +105,17 @@
     color:  paleturquoise;
   }
   
+  @media (max-width: 600px ) {
+    footer {
+        padding: 0;
+    }
+    
+    .inner-element {
+        padding-top: 2px;
+    }
+
+    .contact {
+        font-size: 1.0rem;
+    }
+  }
   

@@ -23,14 +23,14 @@ class App extends React.Component {
         <div className="App">                  
           <nav className="navbar fixed-top main_frame" >           
             <Link className="navbar-brand px-2" to="/">
-              <span><i className="fas fa-globe"></i> GLOBAL RATES</span>
+              <i className="fas fa-globe"></i> <span>GLOBAL RATES</span>
             </Link>              
             <ul className="nav">
               <li className="nav-item">
-                <Link id="baseCurrencyNav" className="nav-link"  to="/">Base Currency</Link>
+                <Link id="baseCurrencyNav" className="nav-link"  to="/">Base <span>Currency</span></Link>
               </li>
               <li className="nav-item">
-                <Link id="pairComparisonNav" className="nav-link" to="/pair$">Pair Comparison</Link>
+                <Link id="pairComparisonNav" className="nav-link" to="/pair$">Pair <span>Comparison</span></Link>
               </li>
             </ul>
           </nav>

@@ -91,7 +91,7 @@ class Pair extends React.Component {
 
   render (){
     return (
-      <div className="pair" id="pairComparison">
+      <div className="pair">
         <div id="pairContainer"> 
           <Currency amount={this.state.leftCurrencyDisplay}  parentCallback={this.handleLeftCallback} onChange={this.handleLeftCurrencyChange}/> 
           <Currency amount={this.state.rightCurrencyDisplay} parentCallback={this.handleRightCallback}/>

@@ -2,7 +2,6 @@
     display: block;
     padding: 4px;
     border-radius: 20px;
-    max-width: 400px;
     background-color:skyblue;
     border: 2px solid black;
     opacity: 0.95;    
@@ -101,3 +100,13 @@ input{
       text-align: end;
       margin-right: 1.1rem;    
   }
+
+  @media (max-width: 600px) {
+    .pair{
+        width: 100%;
+        border-radius: 0;
+    }
+    .wrapper{
+        width: 380px;
+    }
+}

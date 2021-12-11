@@ -20,3 +20,10 @@
     display: flex;
     justify-content: center;    
 }
+
+@media (max-width: 600px) {
+    .base-container{
+        width: 100%;
+        border-radius: 0;
+    }
+}

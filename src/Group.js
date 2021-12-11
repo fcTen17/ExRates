@@ -91,10 +91,8 @@ const CurrencyCheckOption = (props) => {
     
   return (    
     <div className="check-option-container">
-      <label className="form-check-label" htmlFor={`${currencyCode}dropdownCheck`}>
-        <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`} alt=""></img>
-        {currencyCode}
-      </label>
+      <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`} alt=""></img>
+      {currencyCode}
       <input type="checkbox" className="form-check-input" id={`${currencyCode}dropdownCheck`} defaultValue={`${currencyCode}`}></input>
     </div>
   )
@@ -278,3 +276,15 @@ class Group extends React.Component {
 }
 
 export default Group;
+
+/*
+
+<div className="check-option-container">
+  <label className="form-check-label" htmlFor={`${currencyCode}dropdownCheck`}>
+    <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`} alt=""></img>
+    {currencyCode}
+  </label>
+  <input type="checkbox" className="form-check-input" id={`${currencyCode}dropdownCheck`} defaultValue={`${currencyCode}`}></input>
+</div>
+
+*/

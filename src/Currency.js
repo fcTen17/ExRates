@@ -68,11 +68,11 @@ class Currency extends React.Component {
                   <div id="currency_inner">
                     <div id="flag_country_box">
                       <img id="currency_flag" src={`/image/flags/${this.state.selectedCurrencyCode}.png`} alt=""></img>
-                      <p id="currency_country">{this.state.selectedCurrencyCountry.toUpperCase()}</p>
+                      <div id="currency_country">{this.state.selectedCurrencyCountry.toUpperCase()}</div>
                     </div>
                     <div id="code_name_box">
-                      <p id="currency_code">{this.state.selectedCurrencyCode}</p>
-                      <p id="currency_name">{this.state.selectedCurrencyName}</p>
+                      <div id="currency_code">{this.state.selectedCurrencyCode}</div>
+                      <div id="currency_name">{this.state.selectedCurrencyName}</div>
                     </div> 
                   </div>                 
                 </button>

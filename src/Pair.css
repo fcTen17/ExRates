@@ -3,19 +3,19 @@
     padding: 4px;
     border-radius: 20px;
     max-width: 400px;
-    background-color:darkslategray;
+    background-color:skyblue;
     border: 2px solid black;
     opacity: 0.95;    
 }
 
 #pairComparison {
-    min-width: 360px;
+    min-width: 380px;
 }
 
 #pairContainer {
     display: flex;
     justify-content: center;
-    background-color: darkslategray;
+    background-color: skyblue;
     border-radius: 8px;
     border-bottom: 2px solid black;
 }
@@ -38,7 +38,8 @@ input{
     width: 8rem;
     height: 1.9rem;
     background-color: white;
-    border: 2px solid darkslategray;
+    border: 2px solid slategray;
+    padding-right: 0.5rem;
     background-color:;
     color: black;
     border-radius: 6px;

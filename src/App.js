@@ -21,7 +21,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">                  
-          <nav className="navbar fixed-top main_frame" >           
+          <nav className="navbar main_frame" >           
             <Link className="navbar-brand px-2" to="/">
               <i className="fas fa-globe"></i> <span>GLOBAL RATES</span>
             </Link>              

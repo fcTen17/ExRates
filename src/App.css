@@ -12,7 +12,6 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
     background-color: rgb(226, 247, 247) ;
   }
   
@@ -21,7 +20,7 @@
   }
 
   .main_frame {
-    background-color:darkslategray;
+    background-color:skyblue;
     opacity: 0.6;
     color: white;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -29,6 +28,7 @@
   
   
   /* Navbar */
+  
   .navbar-brand {
     color: white;
   }
@@ -64,11 +64,11 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(180deg, #f5faf8 45.71%, #dcfaef 45.71%, #dcfaef 50%, #f5faf8 50%, #f5faf8 95.71%, #dcfaef 95.71%, #dcfaef 100%);
-    background-size: 70.00px 70.00px;
-    padding:0;
-    margin:0;
+    align-items: flex-start;
+    background-image: linear-gradient(180deg, #fcffff 50%, #74d8e8 50%, #74d8e8 50%, #fcffff 50%, #fcffff 100%, #74d8e8 100%, #74d8e8 100%);
+    background-size: 64.00px 64.00px;
+    padding-top: 20px;
+    margin: 0;
   }
  
 

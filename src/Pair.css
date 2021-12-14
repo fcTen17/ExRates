@@ -34,7 +34,7 @@
 input{
     text-align: end; 
     width: 8rem;
-    height: 1.9rem;
+    
     background-color: white;
     border: 2px solid slategray;
     padding-right: 0.5rem;
@@ -59,7 +59,7 @@ input{
 
   .box {
     color: white;
-    border-radius: 8px;
+   
     text-align:center;
     vertical-align: top;
     font-size: .7rem;
@@ -87,6 +87,10 @@ input{
       font-size: 1.3rem;
       justify-content: space-between;
           
+  }
+
+  .box-3 span {
+      padding: rem;
   }
 
   .box-4 {

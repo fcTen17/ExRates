@@ -38,13 +38,16 @@ class Pair extends React.Component {
       .then(json)
       .then((data) => {
         if (data) {          
-          this.setState({ latestFetchJson: data})        
+          this.setState({ latestFetchJson: data})
+          let unit = this.convertCurrency( 1, this.state.leftCurrencyCode, this.state.rightCurrencyCode, data);
+          this.setState({ leftToRightUnit : unit })        
         }
       })
       .catch((error) => {
         this.setState({ error: error.message });
         console.log(error);
       })
+      
   }
 
   convertCurrency(value, left, right, jasonData) {

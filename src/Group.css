@@ -23,13 +23,11 @@
 }
 
 .group-add-form {
-    padding: 8px 16px;
-    min-width: 160px;
+   
 }
 
 .check-option-container {
-    display: flex;
-    justify-content:flex-start;
+   
 }
 
 .small-flag {
@@ -37,9 +35,7 @@
 }
 
 .form-check-input {
-    margin: 0;
-    min-width: 9rem;
-    margin-bottom: .2rem;
+    
 }
 
 .group-inner{

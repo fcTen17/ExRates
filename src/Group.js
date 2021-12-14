@@ -92,7 +92,8 @@ const CurrencyCheckOption = (props) => {
   return (    
     <div className="check-option-container">
       <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`} alt=""></img>
-      {currencyCode}
+      
+      <label for={`${currencyCode}dropdownCheck`}> {currencyCode}</label>
       <input type="checkbox" className="form-check-input" id={`${currencyCode}dropdownCheck`} defaultValue={`${currencyCode}`}></input>
     </div>
   )

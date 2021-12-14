@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Base } from './Base';
 import { Pair } from './Pair';
+import  { CurrencyChart }  from './CurrencyChart';
+import Chart from 'chart.js';
 import './App.css';
 
 class App extends React.Component {
@@ -27,10 +29,13 @@ class App extends React.Component {
             </Link>              
             <ul className="nav">
               <li className="nav-item">
-                <Link id="baseCurrencyNav" className="nav-link"  to="/">Base <span>Currency</span></Link>
+                <Link id="baseCurrencyNav" className="nav-link"  to="/"><span>Base</span> <i class="fas fa-search-dollar"></i></Link>
               </li>
               <li className="nav-item">
-                <Link id="pairComparisonNav" className="nav-link" to="/pair$">Pair <span>Comparison</span></Link>
+                <Link id="pairComparisonNav" className="nav-link" to="/pair$"><span>Pair Calc</span> <i class="fas fa-calculator"></i></Link>
+              </li>
+              <li className="nav-item">
+                <Link id="ChartNav" className="nav-link" to="/chart"><span>Chart</span> <i class="fas fa-chart-line"></i></Link>
               </li>
             </ul>
           </nav>
@@ -38,6 +43,7 @@ class App extends React.Component {
             <Switch>
               <Route path="/" exact component={Base} />
               <Route path="/pair$" component={Pair} />
+              <Route path="/chart" component={CurrencyChart} />
             </Switch>
           </div>
         </div>

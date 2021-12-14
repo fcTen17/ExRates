@@ -21,7 +21,7 @@ class Pair extends React.Component {
 
       leftToRightUnit : '1',  
       leftCurrencyCode : 'EUR',
-      rightCurrencyCode : 'EUR',
+      rightCurrencyCode : 'USD',
       latestFetchJson: '',
     };
 
@@ -93,8 +93,8 @@ class Pair extends React.Component {
     return (
       <div className="pair">
         <div id="pairContainer"> 
-          <Currency amount={this.state.leftCurrencyDisplay}  parentCallback={this.handleLeftCallback} onChange={this.handleLeftCurrencyChange}/> 
-          <Currency amount={this.state.rightCurrencyDisplay} parentCallback={this.handleRightCallback}/>
+          <Currency   parentCallback={this.handleLeftCallback} onChange={this.handleLeftCurrencyChange}/> 
+          <Currency  currencyCode={this.state.rightCurrencyCode} parentCallback={this.handleRightCallback}/>
         </div>
         <div className="wrapper">
           <div className="box box-1">{this.state.leftCurrencyScratch + ' ' + this.state.leftCurrencyOperator}</div>
@@ -113,8 +113,7 @@ class Pair extends React.Component {
             <i>developed by fcTen</i>
           </div>
           <div className="contact">
-            <a href="https://github.com/fcTen17"><i className="fab fa-github"></i></a>
-            <a href="http://linkedin.com/in/fernando-cesar-tenório-206a0a2b"><i className="fab fa-linkedin"></i></a>              
+            <a href="https://github.com/fcTen17"><i className="fab fa-github"></i></a>             
           </div>
         </div>    
       </div>             

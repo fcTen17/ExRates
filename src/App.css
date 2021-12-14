@@ -20,8 +20,8 @@
   }
 
   .main_frame {
-    background-color:skyblue;
-    opacity: 0.6;
+    background-color: navy;
+    opacity: 0.9;
     color: white;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
@@ -55,8 +55,8 @@
     .nav-item span {
         display: none;
     }
-
   }
+ 
 
   /* App Container */
   
@@ -71,6 +71,11 @@
     margin: 0;
   }
  
+  @media (max-width: 600px) {
+      .app-container {
+          padding-top: 0;
+      }
+  }
 
   /* Component Footer */
   

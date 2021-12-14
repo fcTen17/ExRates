@@ -60,8 +60,7 @@ class Base extends React.Component {
               <i>developed by fcTen</i>
             </div>
             <div className="contact">
-              <a href="https://github.com/fcTen17"><i className="fab fa-github"></i></a>
-              <a href="http://linkedin.com/in/fernando-cesar-tenório-206a0a2b"><i className="fab fa-linkedin"></i></a>              
+              <a href="https://github.com/fcTen17"><i className="fab fa-github"></i></a>                        
             </div>
           </div>
         </div>

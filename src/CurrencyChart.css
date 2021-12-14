@@ -1,0 +1,60 @@
+.chart {
+    background-color:skyblue;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border:2px solid black;
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.currency-pair-container {
+    display: flex;
+    justify-content: center;
+}
+
+.date-input-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem;
+    border-bottom: 2px solid black;
+    font-size: 1rem;
+}
+
+.date-input {
+    font-size: 0.9rem;
+    width: 10rem;
+    background-color: azure;    
+}
+
+#myChart {
+    border:2px solid black;
+    background-color: azure;
+    max-height: 240px;
+    width: auto;
+}
+
+.date-options {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+.date-submit {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-top: 0.3rem;
+    border-radius: 8px;
+    background-color: azure;
+}
+
+.date-submit:hover {
+    animation-name: touch;
+    animation-duration: 1s;
+    text-decoration: none;
+} 
+
+@media (max-width: 600px) {
+    .chart{
+        width: 100%;
+        border-radius: 0;
+    }
+}

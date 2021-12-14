@@ -37,13 +37,25 @@ class Currency extends React.Component {
     this.state = {
       selectedCurrencyName : 'Euro',
       selectedCurrencyCode : 'EUR',
-      selectedCurrencyCountry : 'European Union',
+      selectedCurrencyCountry : 'Eurozone',
       currencyAmount : '1'
     };
 
     this.handleSelection = this.handleSelection.bind(this);
     this.handleInput = this.handleInput.bind(this);
      
+    }
+
+    componentDidMount () {
+      if (this.props.currencyCode) {
+        const selectedCode = this.props.currencyCode;
+        this.setState({ selectedCurrencyCode: this.props.currencyCode});
+        const currencyObj = currencyCollection.code[selectedCode]; 
+        this.setState({ selectedCurrencyName: currencyObj.currencyName });
+        this.setState({ selectedCurrencyCountry: currencyObj.country });    
+        this.setState({ selectedCurrencyCode: selectedCode });      
+        //this.props.parentCallback(selectedCode);     
+      }   
     }
 
     handleSelection (event) {

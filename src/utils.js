@@ -70,7 +70,7 @@ export const currencyCollection = {
       currencyName : 'Danish krone',
     },
     EUR : {
-      country : 'European Union',
+      country : 'Eurozone',
       currencyName: 'Euro',
     },
     GBP : {
@@ -110,7 +110,7 @@ export const currencyCollection = {
       currencyName : 'Yen',
     },
     KRW : {
-      country : 'Korea, Republic Of',
+      country : 'Korea, Republic',
       currencyName : 'Won',
     },
     MXN : {
@@ -142,7 +142,7 @@ export const currencyCollection = {
       currencyName : 'New Romanian leu',
     },
     RUB : {
-      country : 'Russian Federation',
+      country : 'Russia',
       currencyName : 'Russian ruble',
     },
     SEK : {

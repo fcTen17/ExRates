@@ -90,12 +90,15 @@ const CurrencyCheckOption = (props) => {
   } = props;
     
   return (    
-    <div className="check-option-container">
-      <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`} alt=""></img>
-      
-      <label for={`${currencyCode}dropdownCheck`}> {currencyCode}</label>
-      <input type="checkbox" className="form-check-input" id={`${currencyCode}dropdownCheck`} defaultValue={`${currencyCode}`}></input>
-    </div>
+    <li className="check-option-container">
+      <div className="check-option-flag-code">
+        <img className={`small_flag`} src={`/image/flags/${currencyCode}.png`} alt=""></img>
+        {currencyCode}
+      </div>
+      <div className="check-option-checkbox">
+        <input type="checkbox" className="form-check-input" id={`${currencyCode}dropdownCheck`}  defaultValue={`${currencyCode}`}></input>
+      </div>   
+    </li>
   )
 }
 
@@ -238,23 +241,23 @@ class Group extends React.Component {
               <button onClick={this.clearUserGroups}>CLEAR USER GROUPS</button>            
             </div>
           </div>
-          <div className="btn-group">
+          <div className="btn-group dropstart">
             <button type="button" className="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               New Group
             </button>
             <div className="dropdown-menu">
               <form className="group-add-form">
-                <div className="form-group">
+                <div className="group-add-form-name">
                   <label htmlFor="newGroupNameInput">Group Name</label>
                   <input type="text" className="form-control" id="newGroupNameInput" placeholder="group name"></input>
                 </div>
                 <div id="currencyCheckOptionList">
                   CURRENCY LIST
                 </div>
-                <div className="form-check" id="newGroupCheckOptionContainer">
+                <ul className="form-check" >
                   {currencyCheckOptionRender( currencyCollection.code )}
-                </div>
-                <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">Add Group</button>
+                </ul>
+                <button type="submit" onClick={this.handleSubmit} className="btn btn-primary group-add-submit-btn">Add Group</button>
               </form>
             </div>
           </div>
@@ -288,4 +291,12 @@ export default Group;
   <input type="checkbox" className="form-check-input" id={`${currencyCode}dropdownCheck`} defaultValue={`${currencyCode}`}></input>
 </div>
 
+
+<li className="check-option-container">
+  <label for={`${currencyCode}dropdownCheck`}> {currencyCode}</label>
+  <input type="checkbox" className="form-check-input" id={`${currencyCode}dropdownCheck`} defaultValue={`${currencyCode}`}></input>
+  {currencyCode}
+</li>
+
+<img className={`small_flag`} src={`/image/flags/${currencyCode}.png`} alt=""></img>
 */

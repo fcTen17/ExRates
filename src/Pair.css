@@ -34,7 +34,7 @@
 input{
     text-align: end; 
     width: 8rem;
-    
+    height: 1.5rem;
     background-color: white;
     border: 2px solid slategray;
     padding-right: 0.5rem;
@@ -64,7 +64,7 @@ input{
     vertical-align: top;
     font-size: .7rem;
     margin: 2px 15px;
-    border-radius: 8px;
+   
     overflow: hidden;
   }
   
@@ -84,7 +84,7 @@ input{
       
       margin-left: 1rem;
       display: flex;
-      font-size: 1.3rem;
+      font-size: 1rem;
       justify-content: space-between;
           
   }
@@ -97,8 +97,7 @@ input{
       display: flex;
       justify-content: space-between;
       color: greenyellow;
-     
-      font-size: 1.3rem;
+      font-size: 1rem;
       text-align: end;
       margin-right: 1.1rem;    
   }

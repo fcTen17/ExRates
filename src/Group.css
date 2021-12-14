@@ -17,9 +17,9 @@
     margin: 0 auto;
 }
 
-#newGroupCheckOptionContainer {
+.form-check {
     overflow-y: scroll;
-    max-height: 150px;    
+    max-height: 150px;   
 }
 
 .group-add-form {
@@ -27,7 +27,16 @@
 }
 
 .check-option-container {
-   
+  display: flex;
+}
+
+.check-option-flag-code {
+    width: 4rem;
+}
+
+.check-option-checkbox {
+    padding: 0.3rem;
+    width: 2rem;
 }
 
 .small-flag {
@@ -35,7 +44,9 @@
 }
 
 .form-check-input {
-    
+    margin: 0;
+    width: auto;
+    padding: 0.2rem;
 }
 
 .group-inner{
@@ -81,10 +92,6 @@
     margin: 0.2rem;
 }
 
-.disclaimer {
-    font-size: 0.8rem;
-    font-weight: 200;
-    padding: 0.3rem;
-    margin: 0.2rem;
-    color: gray
-  }
+.group-add-submit-btn {
+    margin: 0 auto;
+}
